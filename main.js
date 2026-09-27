@@ -18,38 +18,40 @@ function Menu() {
 }
 const candidats = [
   {
-    cin: "dkjhq",
-    nom: "asd",
-    prenom: "Soufiane",
-    partiPolitique: "Indépendant",
-    age: 40,
-    electeurs: ["a", "d", "s", "s"],
-  },
-  {
-    cin: "ahsdb",
-    nom: "efe",
-    prenom: "Soufiane",
-    partiPolitique: "Indépendant",
-    age: 40,
-    electeurs: ["a", "s", "s"],
-  },
-  {
-    cin: "jdwkq",
-    nom: "fwe",
-    prenom: "Soufiane",
-    partiPolitique: "Indépendant",
-    age: 40,
-    electeurs: ["a", "s"],
-  },
-  {
-    cin: "hasd",
+    cin: "AB123456",
     nom: "Boushaba",
     prenom: "Soufiane",
     partiPolitique: "Indépendant",
     age: 40,
-    electeurs: ["a", "d", "d", "s", "s"],
+    electeurs: [],
   },
+   {
+    cin: "AB3975",
+    nom: "ali",
+    prenom: "hamaza",
+    partiPolitique: "Indépendant",
+    age: 18,
+    electeurs: [],
+  },
+   {
+    cin: "AB8634",
+    nom: "taric",
+    prenom: "alwi",
+    partiPolitique: "Indépendant",
+    age: 40,
+    electeurs: [],
+  },
+  {
+    cin: "AB8632",
+    nom: "maloma",
+    prenom: "atfi",
+    partiPolitique: "Indépendant",
+    age: 40,
+    electeurs: [],
+  },
+
 ];
+
 function AjouterPlusieursCondidadts() {
   const candidat = {};
   let n = Number(p("Combien de candidats voulez-vous ajouter ?"));
@@ -78,8 +80,8 @@ function AfficherlisteCondidat() {
       "Choisissez une vue :\n" +
         "1 - Trier les candidats par nombre de votes décroissant\n" +
         "2 - Filtrer les candidats par parti politique\n",
-    ),
-  );
+    )
+  )
 
   if (choix === 1) {
     for (let i = 0; i < candidats.length; i++) {
@@ -106,6 +108,7 @@ function AfficherlisteCondidat() {
     }
   } else if (choix === 2) {
     let parti = p("Entrer le parti politique : ");
+    let trouve = false;
 
     for (let i = 0; i < candidats.length; i++) {
       if (candidats[i].partiPolitique === parti) {
@@ -117,10 +120,14 @@ function AfficherlisteCondidat() {
         console.log(`Âge: ${candidats[i].age}`);
         console.log(`Nombre de votes: ${candidats[i].electeurs.length}`);
         console.log("-----------------------------");
+        trouve = true;
       }
     }
-  } else {
-    console.log("Choix invalide. Veuillez entrer 1 ou 2.");
+    if (trouve === false) {
+      console.log("Aucun candidat trouve pour ce parti .");
+    } else {
+      console.log("Choix invalide. Veuillez entrer 1 ou 2.");
+    }
   }
 }
 
@@ -161,22 +168,27 @@ function ModifierInformationsCandidat() {
     if (cin === candidats[i].cin) {
       let Newage = Number(p("Enter new age"));
       let NewPartiPolitique = p("Enter new partipolitique");
+      candidats[i].age = Newage;
+      candidats[i].partiPolitique = NewPartiPolitique;
       console.log(`le nouvue age ${Newage}`);
       console.log(`le nouvue partipolitique ${NewPartiPolitique}`);
       check = true;
     }
+  }
     if (check) {
       console.log("Modifié avec succès");
-    } else console.log("Modifié ni pas succès");
+    } else 
+      console.log("Modifié ni pas succès");
   }
-}
+
 
 function Supprimer_Candidat() {
-  let check = true;
+  let check = false;
   let cin = p("enter le CIN");
   for (let i = 0; i < candidats.length; i++) {
     if (cin === candidats[i].cin) {
-      candidats[i].splice(i, 1);
+      candidats.splice(i, 1);
+      check = true;
     }
   }
   if (check) {
@@ -208,43 +220,66 @@ function RechercherCandidats() {
     console.log("condidat introuvable");
   }
 }
-
 do {
-  Menu();
-  choix = Number(p("Enter la valeur de Menu\t"));
+  Menu()
+
+  choix = Number(p("Enter la valeur de Menu\t"))
 
   switch (choix) {
     case 1:
-      AjouterPlusieursCondidadts();
-      break;
+      console.log("\n***************************************")
+      console.log("      AJOUTER PLUSIEURS CANDIDATS");
+      console.log("***************************************\n")
+      AjouterPlusieursCondidadts()
+      break
+
     case 2:
-      AfficherlisteCondidat();
-      break;
+      console.log("\n***************************************")
+      console.log("         AFFICHER LES CANDIDATS");
+      console.log("***************************************\n")
+      AfficherlisteCondidat()
+      break
+
     case 3:
-      VotesCondidats();
-      break;
+      console.log("\n***************************************")
+      console.log("          VOTER POUR UN CANDIDAT")
+      console.log("***************************************\n")
+      VotesCondidats()
+      break
+
     case 4:
-      ModifierInformationsCandidat();
+      console.log("\n***************************************")
+      console.log("       MODIFIER UN CANDIDAT")
+      console.log("***************************************\n")
+      ModifierInformationsCandidat()
       break;
+
     case 5:
-      console.log("5");
+      console.log("\n***************************************")
+      console.log("       SUPPRIMER UN CANDIDAT")
+      console.log("***************************************\n");
+      Supprimer_Candidat()
       break;
+
     case 6:
-      console.log("6");
+      console.log("\n***************************************")
+      console.log("       RECHERCHER UN CANDIDAT");
+      console.log("***************************************\n")
+      RechercherCandidats();
       break;
+
     case 7:
-      console.log("7");
+      console.log("\n***************************************")
       break;
-    case 8:
-      console.log("8");
-      break;
+
     case 0:
-      console.log("Quites");
-      return;
+      break;
     default:
-      console.log("le nomber ni pas exsit dans le Munu");
+      console.log("\n***************************************")
+      console.log("          CHOIX INVALIDE !");
+      console.log("***************************************\n")
       break;
   }
-} while (choix !== 0);
+} while (choix !== 0)
 
-console.log("Quites");
+console.log("\n*************** QUITES ***************")
