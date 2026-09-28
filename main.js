@@ -18,46 +18,50 @@ function Menu() {
 }
 const candidats = [
   {
-    cin: "AB123456",
-    nom: "Boushaba",
-    prenom: "Soufiane",
-    partiPolitique: "Indépendant",
+    cin: "AA123456",
+    nom: "name1",
+    prenom: "name1",
+    partiPolitique: "IND",
     age: 40,
-    electeurs: [],
-  },
-   {
-    cin: "AB3975",
-    nom: "ali",
-    prenom: "hamaza",
-    partiPolitique: "Indépendant",
-    age: 18,
-    electeurs: [],
-  },
-   {
-    cin: "AB8634",
-    nom: "taric",
-    prenom: "alwi",
-    partiPolitique: "Indépendant",
-    age: 40,
-    electeurs: [],
+    electeurs: ["e1", "e2", "e3", "e4", "e5"],
   },
   {
-    cin: "AB8632",
-    nom: "maloma",
-    prenom: "atfi",
-    partiPolitique: "Indépendant",
+    cin: "AB123456",
+    nom: "name2",
+    prenom: "name2",
+    partiPolitique: "PAM",
     age: 40,
-    electeurs: [],
+    electeurs: ["e6", "e7", "e8", "e9"],
   },
-
+  {
+    cin: "AC123456",
+    nom: "name3",
+    prenom: "name3",
+    partiPolitique: "IND",
+    age: 40,
+    electeurs: ["e10", "e11", "e12", "e13", "e14", "e15", "e16"],
+  },
+  {
+    cin: "AD123456",
+    nom: "name4",
+    prenom: "name4",
+    partiPolitique: "PAM",
+    age: 40,
+    electeurs: ["e17", "e18"],
+  },
 ];
 
 function AjouterPlusieursCondidadts() {
   const candidat = {};
   let n = Number(p("Combien de candidats voulez-vous ajouter ?"));
   for (let i = 0; i < n; i++) {
-    const candidat = {};
     let cin = p("Enter le CIN  ");
+    for (let i = 0; i < candidats.length; i++) {
+      if (cin === candidats[i].cin) {
+        console.log("dija existe");
+        break;
+      }
+    }
     let nom = p("Enter le Nom  ");
     let prenom = p("Enter le prenom  ");
     let partiPolitique = p("Ente le partiPlique  ");
@@ -80,8 +84,8 @@ function AfficherlisteCondidat() {
       "Choisissez une vue :\n" +
         "1 - Trier les candidats par nombre de votes décroissant\n" +
         "2 - Filtrer les candidats par parti politique\n",
-    )
-  )
+    ),
+  );
 
   if (choix === 1) {
     for (let i = 0; i < candidats.length; i++) {
@@ -175,12 +179,10 @@ function ModifierInformationsCandidat() {
       check = true;
     }
   }
-    if (check) {
-      console.log("Modifié avec succès");
-    } else 
-      console.log("Modifié ni pas succès");
-  }
-
+  if (check) {
+    console.log("Modifié avec succès");
+  } else console.log("Modifié ni pas succès");
+}
 
 function Supprimer_Candidat() {
   let check = false;
@@ -220,66 +222,84 @@ function RechercherCandidats() {
     console.log("condidat introuvable");
   }
 }
-do {
-  Menu()
+function Statistiques() {
+  let count = 0;
+  for (let i = 0; i < candidats.length; i++) {
+    count++;
+  }
+  console.log(`le nomber total de condidats is : ${count}`);
+  console.log("-------------------------------------------------\n");
 
-  choix = Number(p("Enter la valeur de Menu\t"))
+  let nomberTotalVote = 0;
+  for (let i = 0; i < candidats.length; i++) {
+    nomberTotalVote = nomberTotalVote + candidats[i].electeurs.length;
+  }
+  console.log(`le nomber total de vote is : ${nomberTotalVote}`);
+}
+do {
+  Menu();
+
+  choix = Number(p("Enter la valeur de Menu\t"));
 
   switch (choix) {
     case 1:
-      console.log("\n***************************************")
+      console.log("\n***************************************");
       console.log("      AJOUTER PLUSIEURS CANDIDATS");
-      console.log("***************************************\n")
-      AjouterPlusieursCondidadts()
-      break
+      console.log("***************************************\n");
+      AjouterPlusieursCondidadts();
+      break;
 
     case 2:
-      console.log("\n***************************************")
+      console.log("\n***************************************");
       console.log("         AFFICHER LES CANDIDATS");
-      console.log("***************************************\n")
-      AfficherlisteCondidat()
-      break
+      console.log("***************************************\n");
+      AfficherlisteCondidat();
+      break;
 
     case 3:
-      console.log("\n***************************************")
-      console.log("          VOTER POUR UN CANDIDAT")
-      console.log("***************************************\n")
-      VotesCondidats()
-      break
+      console.log("\n***************************************");
+      console.log("          VOTER POUR UN CANDIDAT");
+      console.log("***************************************\n");
+      VotesCondidats();
+      break;
 
     case 4:
-      console.log("\n***************************************")
-      console.log("       MODIFIER UN CANDIDAT")
-      console.log("***************************************\n")
-      ModifierInformationsCandidat()
+      console.log("\n***************************************");
+      console.log("       MODIFIER UN CANDIDAT");
+      console.log("***************************************\n");
+      ModifierInformationsCandidat();
       break;
 
     case 5:
-      console.log("\n***************************************")
-      console.log("       SUPPRIMER UN CANDIDAT")
+      console.log("\n***************************************");
+      console.log("       SUPPRIMER UN CANDIDAT");
       console.log("***************************************\n");
-      Supprimer_Candidat()
+      Supprimer_Candidat();
       break;
 
     case 6:
-      console.log("\n***************************************")
+      console.log("\n***************************************");
       console.log("       RECHERCHER UN CANDIDAT");
-      console.log("***************************************\n")
+      console.log("***************************************\n");
       RechercherCandidats();
       break;
 
     case 7:
-      console.log("\n***************************************")
+      console.log("\n***************************************");
+      console.log("             STATISTIQUE ");
+      console.log("\n***************************************");
+      Statistiques();
+
       break;
 
     case 0:
       break;
     default:
-      console.log("\n***************************************")
+      console.log("\n***************************************");
       console.log("          CHOIX INVALIDE !");
-      console.log("***************************************\n")
+      console.log("***************************************\n");
       break;
   }
-} while (choix !== 0)
+} while (choix !== 0);
 
-console.log("\n*************** QUITES ***************")
+console.log("\n*************** QUITES ***************");
