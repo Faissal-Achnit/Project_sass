@@ -54,18 +54,29 @@ const candidats = [
 function AjouterPlusieursCondidadts() {
   const candidat = {};
   let n = Number(p("Combien de candidats voulez-vous ajouter ?"));
-  for (let i = 0; i < n; i++) {
-    let cin = p("Enter le CIN  ");
-    for (let i = 0; i < candidats.length; i++) {
-      if (cin === candidats[i].cin) {
-        console.log("dija existe");
+  let i = 0;
+  while (i < n) {
+    let cin = p("Enter le CIN: ");
+    let existe = false;
+    for (let j = 0; j < candidat.length; j++) {
+      if (cin === candidat[j].cin) {
+        existe = true;
         break;
       }
     }
+    if (existe) {
+      console.log("CIN deja existe !");
+      continue;
+    }
+
     let nom = p("Enter le Nom  ");
     let prenom = p("Enter le prenom  ");
     let partiPolitique = p("Ente le partiPlique  ");
     let age = Number(p("Ente le age  "));
+    while (age < 18) {
+      console.log("Age ni pas corricte !");
+      age = Number(p("Enter l'age: "));
+    }
     candidat.cin = cin;
     candidat.nom = nom;
     candidat.prenom = prenom;
@@ -75,6 +86,7 @@ function AjouterPlusieursCondidadts() {
     candidats.push(candidat);
 
     console.log("Candidat ajoute avec succes !\n");
+    i++;
   }
 }
 
