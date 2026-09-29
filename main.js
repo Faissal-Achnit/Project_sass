@@ -1,5 +1,7 @@
 const p = require("prompt-sync")();
+
 let choix;
+
 function Menu() {
   console.log(
     "*************** Gestion des Élections et Listes Électorales au Maroc ***************\n",
@@ -52,27 +54,24 @@ const candidats = [
 ];
 
 function AjouterPlusieursCondidadts() {
-  const candidat = {};
-  let n = Number(p("Combien de candidats voulez-vous ajouter ?"));
-  let i = 0;
-  while (i < n) {
+  
+  let n = Number(p("Combien de candidats voulez-vous ajouter? :"));
+  for (let i = 0; i < n; i++) {
+    const candidat = {};
     let cin = p("Enter le CIN: ");
-    let existe = false;
-    for (let j = 0; j < candidat.length; j++) {
-      if (cin === candidat[j].cin) {
-        existe = true;
-        break;
+
+    for (let j = 0; j < candidats.length; j++) {
+      if (cin === candidats[j].cin) {
+        console.log("CIN deja existe!");
+        return;
       }
-    }
-    if (existe) {
-      console.log("CIN deja existe !");
-      continue;
     }
 
     let nom = p("Enter le Nom  ");
     let prenom = p("Enter le prenom  ");
     let partiPolitique = p("Ente le partiPlique  ");
     let age = Number(p("Ente le age  "));
+
     while (age < 18) {
       console.log("Age ni pas corricte !");
       age = Number(p("Enter l'age: "));
@@ -86,7 +85,6 @@ function AjouterPlusieursCondidadts() {
     candidats.push(candidat);
 
     console.log("Candidat ajoute avec succes !\n");
-    i++;
   }
 }
 
@@ -179,7 +177,7 @@ function VotesCondidats() {
 
 function ModifierInformationsCandidat() {
   let check = false;
-  let cin = p("enter le cin");
+  let cin = p("enter le cin : ");
   for (let i = 0; i < candidats.length; i++) {
     if (cin === candidats[i].cin) {
       let Newage = Number(p("Enter new age"));
@@ -198,7 +196,7 @@ function ModifierInformationsCandidat() {
 
 function Supprimer_Candidat() {
   let check = false;
-  let cin = p("enter le CIN");
+  let cin = p("enter le CIN : ");
   for (let i = 0; i < candidats.length; i++) {
     if (cin === candidats[i].cin) {
       candidats.splice(i, 1);
